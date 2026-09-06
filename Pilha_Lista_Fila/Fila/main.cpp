@@ -58,10 +58,11 @@ public:
         }
         else if (this->n == 1)
         {
+
             int x = this->head->x;
             delete this->tail;
-            this->head->NULL;
-            this->tail->NULL;
+            this->head = NULL;
+            this->tail = NULL;
             this->n--;
             return x;
         }
@@ -95,17 +96,40 @@ public:
 
     void clear() // Limpa a fila
     {
-        while (n != 0)
+        if (this->isEmpty())
         {
-            Node *t = this->head;
-            this->head = this->head->next;
-            delete t;
-            n--;
+            cout << "Erro: fila vazia.\n";
+        }
+        else
+        {
+            while (n != 0)
+            {
+                Node *t = this->head;
+                this->head = this->head->next;
+                delete t;
+                n--;
+            }
         }
     }
 
     void show() // Mostrar
     {
+        if (this->isEmpty())
+        {
+            cout << "Erro: fila vazia.\n";
+        }
+        else
+        {
+            int cont = 1;
+            while (n != 0)
+            {
+                int x = this->head->x;
+                Node *t = this->head;
+                this->head = this->head->next;
+                cout << cont++ << ": " << x << "\n";
+                this->n--;
+            }
+        }
     }
 
     Node *first() // Retorna o primeiro elemento
@@ -131,11 +155,12 @@ int main()
     Queue Q;
     do
     {
+        system("cls");
         cout << "==MENU==\n";
         cout << "0-Sair\n";
         cout << "1-Enfileirar\n";
         cout << "2-Desenfileirar\n";
-        cout << "3-Consultar o elemento que está no início da fila\n";
+        cout << "3-Consultar o elemento que esta no inicio da fila\n";
         cout << "4-Tamanho da fila\n";
         cout << "5-Verificar se estar vazia\n";
         cout << "6-Imprimir fila\n";
@@ -153,29 +178,41 @@ int main()
             Q.enqueue(item);
             break;
         case 2:
-            Q.dequeue();
+
+            cout << "Item desenfileirado: " << Q.dequeue() << "\n";
             break;
         case 3:
-            Q.first();
+            cout << Q.first()->x << "\n";
             break;
         case 4:
-            Q.size();
+            cout << Q.size() << "\n";
         case 5:
-            Q.isEmpty();
+            if (Q.isEmpty() == true)
+            {
+                cout << "Esta vazia \n";
+            }
+            else
+            {
+                cout << "Nao esta vazia, possui " << Q.size() << " itens \n";
+            }
             break;
         case 6:
             Q.show();
             break;
         case 7:
             Q.clear();
+            cout << "Lista esvaziada, total de itens igual a " << Q.size() << "\n";
             break;
 
         default:
             cout << "Opcao invalida\n";
             break;
-        }}
-        while (op != 0);
-            
-        Q.~Queue();
-        return 0;
-    }
+        }
+        system("pause");
+    } while (op != 0);
+
+    Q.~Queue();
+    return 0;
+}
+
+// apoio moral por Pedro Henrique Santos
