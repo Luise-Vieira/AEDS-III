@@ -13,6 +13,19 @@ privade:
     Node *head;
     Node *tail;
     int n;
+//FunÃ§Ã£o usasa para obter um no da lista
+//pelo seu indice (0.. n-1)
+    Node* getNode (int pos)
+    {
+        int i=0;
+        Node *t = this->head;
+        while(i<pos)
+        {
+            t=t->next;
+            i++;
+        }
+        return t;
+    }
 
 public:
     //Construtor
@@ -36,7 +49,7 @@ public:
         t->next= NULL;
         if (this->isEmpty)
         {
-            //Se estiver vazia -> atribui na primeira posição
+            //Se estiver vazia -> atribui na primeira posiÃ§Ã£o
             this->head= t;
             this->tail=t;
 
@@ -57,11 +70,11 @@ public:
         }
         else
         {
-            Node *t =new Node ();
-            t->item=item;
-            t->next= NULL;
-            this->tail->next=t;
-            this->tail=t;
+            Node *t =new Node ();//cria nova caixinha
+            t->item=item; //recebe o item na caixinha
+            t->next= NULL;// o next do t aponta pra null
+            this->tail->next=t;// o next do tail passa a apontar para o ultimo que no caso foi a nova caixinha criada
+            this->tail=t; //o tail passa a apontar para onde t aponta
             this->n++;
 
 
@@ -69,14 +82,60 @@ public:
         }
 
     }
-    //Inserir em uma posição
+    //Inserir em uma posiÃ§Ã£o
     void pushAt (int item,int pos)
     {
+        if(pos <=0 || pos > this->n)
+        {
+            cout << "Erro: indice invalido!!\n";
+            return;
+        }
+        if(pos == 0)
+        {
+            this->pushFront(item);
+        } else if (pos == n-1)
+        {
+            this->pushBack(item);
+        }
+        else //Neste caso existem pelo menos 2 elementos na lista e n estou inserindo nem no inicio nem no fim
+        {
+            Node *nn= new Node(); //Cria um novo no para ligar entre duas caixas q estao no meio
+            nn->item=item;
+            //posicionar um temporario na posiÃ§Ã£o anterior
+            Node *t1= this->getNode(pos-1);
+            Node *t2=t1->next;
+            t1->next=nn;
+            nn->next=t2;
+            this->n++;
+        }
 
     }
     //Remover do inicio
     int popFront()
     {
+        if(this->isEmpty())
+        {
+            cout << "Erro: Lista vazia \n";
+            return -1;
+        }
+        else
+        {
+            int item= this->head->item; //fez a copia do item para imprimir
+            if(this->n==1)
+            {
+                delete this->head;
+                this->head= NULL;
+                this->tail= NULL;
+            }
+            else
+            {
+                Node *t = this->head;
+                this->head = this->head->next;
+                delete t;
+            }
+            this->n--;
+            return item;
+        }
 
     }
     //Remover do Final
@@ -84,7 +143,7 @@ public:
     {
 
     }
-    //Remover de uma posição especifica
+    //Remover de uma posiÃ§Ã£o especifica
     int pop (int pos)
     {
 
@@ -99,7 +158,7 @@ public:
     {
 
     }
-    //Retorna o item de uma posição
+    //Retorna o item de uma posiÃ§Ã£o
     int get(int pos)
     {
 
@@ -109,7 +168,7 @@ public:
     {
         return this->n;
     }
-    //Verifica se está vazia
+    //Verifica se estÃ¡ vazia
     bool isEmpty()
     {
         return this->n==0; //Jeito reduzido do if else
