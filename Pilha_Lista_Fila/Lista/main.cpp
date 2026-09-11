@@ -9,7 +9,7 @@ struct Node
 
 class List
 {
-privade:
+private:
     Node *head;
     Node *tail;
     int n;
@@ -29,7 +29,7 @@ privade:
 
 public:
     //Construtor
-    void List()
+    List()
     {
         this->head= NULL;
         this->tail= NULL ;
@@ -38,7 +38,7 @@ public:
     //Destrutor
     ~List()
     {
-
+        this->clear();
     }
     //Inserir no inicio
     void pushFront (int item)
@@ -47,7 +47,7 @@ public:
         Node *t =new Node();
         t->item =item;
         t->next= NULL;
-        if (this->isEmpty)
+        if (this->isEmpty())
         {
             //Se estiver vazia -> atribui na primeira posição
             this->head= t;
@@ -83,7 +83,7 @@ public:
 
     }
     //Inserir em uma posição
-    void pushAt (int item,int pos)
+    void push (int item,int pos)
     {
         if(pos <=0 || pos > this->n)
         {
@@ -93,7 +93,8 @@ public:
         if(pos == 0)
         {
             this->pushFront(item);
-        } else if (pos == n-1)
+        }
+        else if (pos == n-1)
         {
             this->pushBack(item);
         }
@@ -141,7 +142,25 @@ public:
     //Remover do Final
     int popBack()
     {
-
+        if(this->isEmpty())
+        {
+            cout << "Erro: Lista vazia \n";
+            return -1;
+        }
+        else if (this->n==1)
+        {
+            return this->popFront();
+        }
+        else
+        {
+            Node *t= this->getNode(this-> n -2);
+            int item = this->tail->item;
+            delete this->tail;
+            t->next=NULL;
+            this->tail =t;
+            this->n--;
+            return item;
+        }
     }
     //Remover de uma posição especifica
     int pop (int pos)
@@ -176,12 +195,20 @@ public:
     //Apaga todos os elementos da lista
     void clear ()
     {
-
+        while(!this->isEmpty())
+        {
+            this->popFront();
+        }
     }
     //Mostra todos os elementos da lista
     void show()
     {
-
+        cout << "\nLista: ";
+        for(Node *t = this->head; t != NULL; t=t->next)
+        {
+            cout << t->item << " ";
+        }
+        cout << "\n";
     }
 
 
@@ -189,6 +216,21 @@ public:
 
 int main()
 {
-    cout << "Hello world!" << endl;
-    return 0;
+    //Lista *L= new List(); //usando variavel dinamica e ai no final tem que dar um delete nela delete L;
+    cout << "  ===== MENU ===== ";
+    cout <<"1 - Inserir elemento no início\n";
+         cout <<"2 - Inserir elemento no final\n";
+         cout <<"3 - Inserir elemento em uma posicao\n";
+         cout <<"4 - Remover elemento do início\n";
+         cout <<"5 - Remover elemento do final\n";
+         cout <<"6 - Remover elemento de uma posicao\n";
+         cout <<"7 - Consultar elemento do início\n";
+         cout <<"8 - Consultar elemento do final\n";
+         cout <<"9 - Consultar elemento de uma posicao\n";
+         cout <<"10 - Obter tamanho da lista\n";
+         cout <<"11 - Verificar se a lista está vazia\n";
+         cout <<"12 - Mostrar lista\n";
+         cout <<"13 - Remover todos os elementos\n";
+         cout <<"0 - Sair\n";
+
 }
