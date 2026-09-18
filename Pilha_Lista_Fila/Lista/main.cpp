@@ -258,6 +258,11 @@ public:
     // Mostra todos os elementos da lista
     void show()
     {
+        if (this->isEmpty())
+        {
+            cout << "Erro: fila vazia.\n";
+            return;
+        }
         cout << "\nLista: ";
         for (Node *t = this->head; t != NULL; t = t->next)
         {
@@ -327,18 +332,39 @@ int main()
             cout << L.pop(pos);
             break;
         case 7:
-            cout << L.getFront();
+            if (L.isEmpty() == false)
+            {
+                cout << "item: " << L.getFront() << "\n";
+            }
+            else
+            {
+                L.getFront();
+            }
             break;
         case 8:
-            cout << L.getBack();
+            if (L.isEmpty() == false)
+            {
+                cout << "item: " << L.getBack() << "\n";
+            }
+            else
+            {
+                L.getBack();
+            }
             break;
         case 9:
-            cout << "Digite a posicao que deseja visualizar: \n";
-            cin >> pos;
-            cout << L.get(pos);
+            if (L.isEmpty() == false)
+            {
+                cout << "Digite a posicao que deseja visualizar: \n";
+                cin >> pos;
+                cout << "item: " << L.get(pos) << "\n";
+            }
+            else
+            {
+                L.getFront();
+            }
             break;
         case 10:
-            cout << "Tamanho da lista: " << L.size();
+            cout << "Tamanho da lista: " << L.size() << "\n";
             break;
         case 11:
             if (L.isEmpty() == true)
@@ -355,6 +381,7 @@ int main()
             break;
         case 13:
             L.clear();
+            cout << "Lista esvaziada!\n";
             break;
         default:
             cout << "Opcao invalida!";
