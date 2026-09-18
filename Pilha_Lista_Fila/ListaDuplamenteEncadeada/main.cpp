@@ -17,21 +17,36 @@ private:
     Node *tail;
     int n;
 
-    //Função usada para obter um nó da lista
-    //pelo seu índice (0 .. n-1).
-    //É possivel melhorar essa implementação para deixar esse metodo mais eficiente, percorrendo a lista a partir do fim para o inicio
+    //FunÃ§Ã£o usada para obter um nÃ³ da lista
+    //pelo seu Ã­ndice (0 .. n-1).
+    //Ã‰ possivel melhorar essa implementaÃ§Ã£o para deixar esse metodo mais eficiente, percorrendo a lista a partir do fim para o inicio
     //quando necessario.
     Node* getNode (int pos)
     {
-        int i = 0;
-        Node *t = this->head;
-        while (i < pos)
+        Node *t;
+        if(pos < this->n-pos)
         {
-            t = t->next;
-            i++;
+            int i = 0;
+            t = this->head;
+            while (i < pos)
+            {
+                t = t->next;
+                i++;
+            }
         }
-        return t;
-    }
+            else
+            {
+                int i = this->n-1;
+                t = this->tail;
+                while (i > pos)
+                {
+                    t = t->prev;
+                    i--;
+                }
+            }
+            return t;
+        }
+
 
 
 public:
@@ -49,7 +64,7 @@ public:
         this->clear();
     }
 
-    //Inserir no início
+    //Inserir no inÃ­cio
     void pushFront (int item)
     {
         Node *nn = new Node();
@@ -78,13 +93,13 @@ public:
 
     }
 
-    //Insrir em uma posição
+    //Insrir em uma posiÃ§Ã£o
     void pushAt (int item, int pos)
     {
 
     }
 
-    //Remover do início
+    //Remover do inÃ­cio
     int popFront ()
     {
 
@@ -98,27 +113,62 @@ public:
 
     }
 
-    //Remover de uma posição
+    //Remover de uma posiÃ§Ã£o
     int pop ( int pos )
     {
 
     }
 
-    //Retorna o item do início
+    //Retorna o item do inÃ­cio
     int getFront ()
     {
-
+        if (this->isEmpty())
+        {
+            cout << "Erro: fila vazia.\n";
+            return 0;
+        }
+        else
+        {
+            // cout << "ITEM: " << this->head->item << "\n";
+            return this->head->item;
+        }
     }
 
     //Retorna o item do final
     int getBack ()
     {
-
+        if (this->isEmpty())
+        {
+            cout << "Erro: fila vazia.\n";
+            return 0;
+        }
+        else
+        {
+            return this->tail->item;
+        }
     }
 
-    //Retorna o item de uma posição
+    //Retorna o item de uma posiÃ§Ã£o
     int get (int pos)
     {
+        if (pos < 0 || pos > this->n)
+        {
+            cout << "Erro: indice invalido!!\n";
+            return -1;
+        }
+        if (pos == 0)
+        {
+            return this->getFront();
+        }
+        else if (pos == n - 1)
+        {
+            return this->getBack();
+        }
+        else
+        {
+            Node *t = this->getNode(pos);
+            return t->item;
+        }
 
     }
 
@@ -128,16 +178,19 @@ public:
         return this->n;
     }
 
-    //Verifica se está vazia
+    //Verifica se estÃ¡ vazia
     bool isEmpty ()
     {
         return this->n == 0;
     }
 
     //Apaga todos os elementos da lista
-    void clear ()
+    void clear()
     {
-
+        while (!this->isEmpty())
+        {
+            this->popFront();
+        }
     }
 
 
@@ -160,6 +213,7 @@ public:
             t=t->prev;
         }
         cout << "\n n= " << this->n;
+        cout << endl;
     }
 
     //Atribui um valor a elemento da lista
@@ -175,10 +229,25 @@ public:
 
 int main()
 {
+    int item;
+    int pos;
+    int op;
+
     List L;
     L.pushFront(10);
-    L.pushFront(11);
-    L.pushFront(12);
+    L.pushFront(20);
+    L.pushFront(30);
+    L.pushFront(40);
+    L.pushFront(50);
+    L.pushFront(60);
+    L.pushFront(70);
+    L.pushFront(80);
+    L.pushFront(90);
+    L.pushFront(100);
     L.show();
-    return 0;
+    for(int i=0;i<L.size();i++)
+    {
+
+    cout << L.get(i) << "\n";
+    }
 }
