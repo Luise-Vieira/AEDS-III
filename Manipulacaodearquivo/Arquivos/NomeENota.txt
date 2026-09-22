@@ -1,0 +1,11 @@
+
+ Nome: ana Nota: 10
+ Nome: lana Nota: 2
+ Nome: vanessa Nota: 10
+ Nome: luise Nota: 10
+ Nome: fernando Nota: 9
+ Nome: leonardo Nota: 7
+ Nome: Joao Nota: 2
+ Nome: Lara Nota: 5
+ Nome: Maria Nota: 45
+ Nome: paulo Nota: 9
