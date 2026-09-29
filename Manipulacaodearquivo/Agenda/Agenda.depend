@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1790702034 source:c:\users\0116348\documents\luise\aeds iii\manipulacaodearquivo\agenda\main.cpp
+	<iostream>
+	<fstream>
+
