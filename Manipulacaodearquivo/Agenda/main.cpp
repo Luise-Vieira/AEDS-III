@@ -30,11 +30,11 @@ public:
         }
 
         //Mais facil /grava mais bytes
-        fin.read((char*)this, sizeof(Agenda));// passa o endereÁo e o tamanho
+        fin.read((char*)this, sizeof(Agenda));// passa o endere√ßo e o tamanho
 
 
         //Mais codigo / gera arquivos menores
-        /*fin.write(&this->quantidade,sizeof(int));//quantidade n È ponteiro ent precisa passar o endereÁo
+        /*fin.write(&this->quantidade,sizeof(int));//quantidade n √© ponteiro ent precisa passar o endere√ßo
         for (int i=0; i< this->quantidade; i++)
         {
          fout.read((char*) &this->contatos[i],sizeof(Contato));
@@ -53,11 +53,11 @@ public:
         }
 
         //Mais facil /grava mais bytes
-        fout.write((char*)this, sizeof(Agenda));// passa o endereÁo e o tamanho
+        fout.write((char*)this, sizeof(Agenda));// passa o endere√ßo e o tamanho
 
 
         //Mais codigo / gera arquivos menores
-        /*fout.write(&this->quantidade,sizeof(int));//quantidade n È ponteiro ent precisa passar o endereÁo
+        /*fout.write(&this->quantidade,sizeof(int));//quantidade n √© ponteiro ent precisa passar o endere√ßo
         for (int i=0; i< this->quantidade; i++)
         {
          fout.write((char*) &this->contatos[i],sizeof(Contato));
@@ -83,19 +83,39 @@ public:
         fout << "<html>";
 
         fout << "<head>";
-
         fout << "<title>";
         fout << "Lista de Contatos";
         fout << "</title>";
-
         fout << "</head>";
-
-        fout << "<body>";
 
         fout << "<h1> Lista de Contatos </h1>";
 
-        fout << "</body>";
 
+        fout << "<table border=\"1\">";// define o inicio da tabela _>border=\"1\" coloca borda
+        fout << "<tr\n>"; //define uma linha na tabela
+        fout << "<th>Codigo</th>\n"; //c√©lula de cabe√ßalho (fica em negrito e centralizada). Vai dentro da primeira linha.
+        fout << "<th>Nome</th>\n";
+        fout << "<th>Telefone</th>\n";
+        fout << "</tr>\n";
+
+        // preenchimento das linhas
+
+        for(int i=0;i<this->quantidade;i++)
+        {
+            fout << "<tr>"; //linha
+                fout << "<td>"; //Dados
+                fout << this->contatos[i].codigo;
+                fout << "</td>";
+                fout << "<td>";
+                fout << this->contatos[i].nome;
+                fout << "</td>";
+                fout << "<td>";
+                fout << this->contatos[i].telefone;
+                fout << "</td>";
+            fout << "</tr>";
+        }
+
+        fout << "</table\n>"; //define o fim da tabela
         fout << "</html>";
 
         fout.close();
