@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1792516644 source:c:\users\0116348\documents\luise\aeds iii\manipulacaodearquivo\ordenacaoexterna\main.cpp
+	<iostream>
+	<fstream>
+
